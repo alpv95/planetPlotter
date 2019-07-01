@@ -7,9 +7,9 @@ def svg2command(file):
     #X and Y axes are switched on printer compared to SVG
     command = ""
     paths, _ = svg2paths(file)
-    #offset, scale = coords(paths, 10300, 7650)
-    offset = (3408.39, -2597.648)
-    scale = (0.8287537980861259, 0.8415007489356664)
+    offset, scale = coords(paths)
+    # offset = (3408.39, -2597.648)
+    # scale = (0.8287537980861259, 0.8415007489356664)
     for path in paths:
         try:
             path_str = path.d()
@@ -30,9 +30,9 @@ def svg2command(file):
                     command += "PA{},{};".format(x,y)
                     xprev = x; yprev = y
 
-    return command
+    return command + "PU;SP2;"
 
-def coords(paths, x_min, y_min, x_frac, y_frac):
+def coords(paths, x_min=0, y_min=0, x_frac=1, y_frac=1):
     xs =[]
     ys = []
     plotterx = 10300
