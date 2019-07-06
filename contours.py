@@ -1,34 +1,48 @@
 from __future__ import division, print_function
-from svgpathtools import svg2paths
+
+import pdb
 import re
+
 import numpy as np
 
-def svg2command(file):
+from svgpathtools import svg2paths
+
+
+def svg2command(file, filter_color='#000000'):
     #X and Y axes are switched on printer compared to SVG
     command = ""
-    paths, _ = svg2paths(file)
-    offset, scale = coords(paths)
-    # offset = (3408.39, -2597.648)
-    # scale = (0.8287537980861259, 0.8415007489356664)
-    for path in paths:
+    paths, attrs = svg2paths(file)
+    print("Paths found:", len(paths))
+    print("Colors found:", set([attr['stroke'] for attr in attrs]))
+    # offset, scale = coords(paths)
+    # print("Offset:", offset)
+    # print("Scale:", scale)
+    offset = (131.687, -2.52)
+    scale = (2.2434710635795345, 1.6644206053965522)
+    for i, path in enumerate(paths):
+        attr = attrs[i]
+        if attr['stroke'] != filter_color:
+            continue
         try:
             path_str = path.d()
         except IndexError:
             continue
 
-        for doble in re.split(" L ", path_str):
-            if doble[0] == 'M':
-                doble = re.split('M |,',doble)
-                doble.pop(0)
-                x = int((float(doble[1]) + offset[0]) * scale[0]); y = int((float(doble[0]) + offset[1]) * scale[1])
-                xprev = x; yprev = y
-                command += 'PU;PA{},{};PD;'.format(x, y)
-            else:
-                doble = doble.split(",")
-                x = int((float(doble[1]) + offset[0]) * scale[0]); y = int((float(doble[0]) + offset[1]) * scale[1])
-                if np.sqrt((x - xprev)**2 + (y-yprev)**2) > 20:
-                    command += "PA{},{};".format(x,y)
+        path_strs = ['M ' + p.strip() for p in path_str.split('M') if len(p.strip())]
+        for p_str in path_strs:
+            for doble in re.split(" L ", p_str):
+                if doble[0] == 'M':
+                    doble = re.split('M |,',doble)
+                    doble.pop(0)
+                    x = int((float(doble[1]) + offset[0]) * scale[0]); y = int((float(doble[0]) + offset[1]) * scale[1])
                     xprev = x; yprev = y
+                    command += 'PU;PA{},{};PD;'.format(x, y)
+                else:
+                    doble = doble.split(",")
+                    x = int((float(doble[1]) + offset[0]) * scale[0]); y = int((float(doble[0]) + offset[1]) * scale[1])
+                    if np.sqrt((x - xprev)**2 + (y-yprev)**2) > 20:
+                        command += "PA{},{};".format(x,y)
+                        xprev = x; yprev = y
 
     return command + "PU;SP2;"
 
@@ -55,3 +69,7 @@ def coords(paths, x_min=0, y_min=0, x_frac=1, y_frac=1):
         yscale = y_frac * plottery / (max(ys) - min(ys))
 
     return (xoffset, yoffset), (xscale, yscale)
+
+if __name__ == '__main__':
+    with open('command.txt', 'w') as f:
+        f.write(svg2command('./garland.svg'))
