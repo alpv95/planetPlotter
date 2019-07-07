@@ -86,5 +86,5 @@ board.write(handle, "\r\n\x03")
 
 board.write(handle, "PD;PA1000,1000;")
 board.write(handle, "PD;PA5000,5000;")
-board.write(handle, "OE;")
+board.write(handle, "OE;") # to read error and remove error light
 board.read(handle)
