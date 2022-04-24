@@ -1,3 +1,7 @@
 *.pyc
 *.egg*
-
+.vscode/
+images/
+planets/*
+planets_full/*
+data/planets_full.zip
