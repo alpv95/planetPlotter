@@ -1,0 +1,40 @@
+=====================================================
+
+
+        The Macosx_gpib_lib Package
+        -----------------------------------
+        (c) 2018.     by Guilhem Vavelin
+        The Linux-gpib Package
+        -----------------------------------
+        (c) 1994-1996 by C.Schroeter
+        (c) 2001-2011 by Frank Mori Hess
+
+=====================================================
+
+This is Macosx_gpib_lib the IEEE-488 card support
+package and measurement suite for Macosx.
+
+This version of Macosx_gpib_lib requires a Mac OS X version 
+10.6 or above and is compiled for 64bits architecture.
+
+See the INSTALL file for instructions on building and
+installing this software package.
+
+*************** COPYRIGHT NOTICE ***********************
+
+If you want to distribute software which makes use of
+this package, please read the COPYING file carefully.
+
+********************************************************
+
+
+
+
+
+
+
+
+
+
+
+

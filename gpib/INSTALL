@@ -1,0 +1,58 @@
+
+Installing Macosx_gpib_lib
+--------------------------------------------------------------------
+
+A) First steps:
+---------------
+
+1) Installing your Hardware:
+
+	Macosx_gpib_lib is only designed for USB adapter.
+	Version 1 works only with 82357 adapter.
+
+2) Unpacking the Software:
+	Unpack the archives where you want. You might have to create
+	a folder to copy the files in.
+	Please ensure that the folder configuration is similar to the
+	following:
+	root.
+	|-gpib.py (the Python wrapper)
+	|-gpibtest.py
+	|-libmacosx_gpib_lib.dylib (the library which connects to usb)
+	|-82357a_fw.hex (FW for 82357A - not included!)
+	|-measat_releaseX1.8.hex (FW for 82357B - not included!)
+
+
+B) Loading the driver modules
+-----------------------------
+
+1) USB devices
+
+	Your device requires an external firmware but this last is not
+	included within the Macosx_gpib_lib package; a tarball is available
+	from http://linux-gpib.sourceforge.net/firmware/. Here you'll find
+        the requested files: 82357a_fw.hex for 82357A and measat_releaseX1.8.hex
+        for 82357B.
+	Macosx_gpib_lib will load it automatically as long as the right
+	firmware resides in the main working directory (see (A-2)).
+		
+E) Trying it out
+----------------
+
+	You may find the examples gpibtest.py program useful as a starting
+	point in trying out your setup. Open it and modify it according
+	to your hardware and type >>>Python gpibtest.py.
+        As macosx_gpib_lib is a port from linux-gpib you'll find more
+        information on the linux-gpib project and website that will be valid for
+        macosx_gpib_lib.
+
+F) Bindings for other languages
+-------------------------------
+
+	Please have a look at gpib_visa.h to see how to wrap with the 
+	Macosx_gpib_lib library.
+
+G) Uninstalling
+---------------
+
+	Just delete the folder which contains the file listed in (A-2)
