@@ -1,5 +1,5 @@
 # planetPlotter
-A interface library for the HP7470A plotter printer, specifically for plotting from ds9 `.ctr` files and `.svg`. 
+An interface library for the HP7470A plotter printer, specifically for plotting from ds9 `.ctr` files and `.svg`. 
 Commands are issued to the printer in HP-GL through a GPIB connection. 
 
 ## Installation
@@ -17,4 +17,4 @@ Use `python make_command.py` to convert file of choice into `command.txt`.
 * Use the silver sharpie for black paper.
 
 ## Example
-![plot](images/black_eye.jpg)
+<img src="images/black_eye.jpg" alt="M64: Black Eye" width="200"/>
