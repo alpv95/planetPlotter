@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 import math
 import time
+import contours
 
-from gpib.gpib import Gpib
+from gpib import Gpib
 
 board = Gpib()
 handle = board.dev(0, 5)
@@ -80,5 +81,5 @@ board.write(handle, "\r\n\x03")
 
 board.write(handle, "PD;PA1000,1000;")
 board.write(handle, "PD;PA5000,5000;")
-board.write(handle, "OE;")  # to read error and remove error light ______
+board.write(handle, "OE;") # to read error and remove error light
 board.read(handle)
