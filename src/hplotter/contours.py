@@ -63,7 +63,7 @@ def ctr2command(file,
     xp = []
     yp = []
     command = ""
-    with open(file, "r") as f:
+    with open("data/" + file, "r") as f:
         contents = f.read()
     offset, scale, xmax = coords_ctr(contents,
                                      x_min=2350,

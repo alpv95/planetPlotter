@@ -1,11 +1,10 @@
 from hplotter.contours import ctr2command
 
-command, compass = ctr2command('M51.ctr',
+command, compass = ctr2command('M104.ctr',
                                border=True,
                                crosshair=False,
                                compass=True,
-                               name="M51: Whirlpool")
+                               name="M104: Sombrero")
 
-with open('compass.txt', 'w') as f:
+with open('command.txt', 'w') as f:
     f.write(command)
-    #f.write(compass)
