@@ -5,3 +5,5 @@ images/
 planets/*
 planets_full/*
 data/planets_full.zip
+.DS_Store
+.idea
